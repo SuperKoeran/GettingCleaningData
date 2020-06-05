@@ -1,0 +1,25 @@
+#This codebook explains the variables used in the project
+
+
+Act_Label <- read.table("./UCI HAR Dataset/activity_labels.txt")[,2]  #Activity Labels txt file
+feature <- read.table("./UCI HAR Dataset/features.txt")[,2]           #Feautre Txt file
+get_feature <- grepl("mean|std", feature)                             #calculates mean and SD of the feature
+Xtest <- read.table("./UCI HAR Dataset/test/X_test.txt")              #Xtest file
+Ytest <- read.table("./UCI HAR Dataset/test/Y_test.txt")              #Ytest file
+Subtest <- read.table("./UCI HAR Dataset/test/subject_test.txt")      #subject test file
+
+
+Testdata <- cbind(as.data.table(Subtest),Ytest,Xtest)                 #Combined Test Data
+
+Xtrain <- read.table("./UCI HAR Dataset/train/X_train.txt")           #X Train file
+Ytrain <- read.table("./UCI HAR Dataset/train/Y_train.txt")           #Y Train file
+
+Subtrain <- read.table("./UCI HAR Dataset/train/subject_train.txt")   #subject train file
+
+
+TrainData <- cbind(as.data.table(Subtrain), Ytrain, Xtrain)            #Combined Train Data
+
+IdLabel <- c("subject","Activity_ID","Activity_Label")                #Combines the labels
+DataLabel <- setdiff(colnames(Merge), IdLabel)                        #Combines them in to one
+
+
